@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binance vs Coinbase vs Indodax untuk Pemula — Jernih Aset</title>
+<meta name="description" content="Perbandingan biaya, keamanan, dan kemudahan pakai Binance, Coinbase, dan Indodax untuk pemula Indonesia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   JERNIH ASET — Design tokens
+   Konsep: kripto itu ramai (noise), kami bikin jernih (clarity)
+   ============================================ */
+
+:root {
+  --bg-base: #0D1220;
+  --bg-surface: #151B2E;
+  --bg-surface-2: #1C2438;
+  --border: #2A3350;
+  --border-soft: #202944;
+
+  --text-primary: #F2F4F8;
+  --text-muted: #8D96AC;
+  --text-faint: #5C6482;
+
+  --accent: #5EEAD4;       /* clarity teal */
+  --accent-dim: #2C6E68;
+  --accent-warn: #F5A623;  /* amber, dipakai sangat sedikit — risiko/CTA */
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --max-width: 1120px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Focus states ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  background: rgba(13, 18, 32, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 50;
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px 2px rgba(94, 234, 212, 0.5);
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.nav-links a:hover { color: var(--text-primary); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 88px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.hero-fog {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-fog::before,
+.hero-fog::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.hero-fog::before {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, var(--accent-dim), transparent 70%);
+  top: -160px;
+  right: -120px;
+}
+
+.hero-fog::after {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, #3A4370, transparent 70%);
+  bottom: -180px;
+  left: -100px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 58px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero p.lede {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0A1712;
+}
+
+.btn-primary:hover { transform: translateY(-1px); background: #7CF0DD; }
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-ghost:hover { border-color: var(--accent); }
+
+/* ---------- Section shell ---------- */
+section { padding: 80px 0; }
+section + section { border-top: 1px solid var(--border-soft); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  max-width: 560px;
+}
+
+.section-head p {
+  color: var(--text-muted);
+  max-width: 420px;
+  font-size: 15px;
+}
+
+/* ---------- Article cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  flex: 1;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  padding-top: 12px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Kejernihan meter (signature element) ---------- */
+.clarity-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.clarity-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 56px;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.clarity-row + .clarity-row {
+  border-top: 1px solid var(--border-soft);
+}
+
+.clarity-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.clarity-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3A4370, var(--border-soft));
+  position: relative;
+  overflow: hidden;
+}
+
+.clarity-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3A4370, var(--accent));
+}
+
+.clarity-score {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-align: right;
+  color: var(--accent);
+}
+
+.clarity-caption {
+  font-size: 13px;
+  color: var(--text-faint);
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Disclaimer callout ---------- */
+.callout {
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  background: rgba(245, 166, 35, 0.06);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex;
+  gap: 16px;
+}
+
+.callout-icon {
+  font-family: var(--font-mono);
+  color: var(--accent-warn);
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--accent-warn);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callout p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.callout strong { color: var(--text-primary); }
+
+/* ---------- Footer ---------- */
+footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 48px 0;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.footer-links a:hover { color: var(--text-primary); }
+
+.footer-note {
+  font-size: 12px;
+  color: var(--text-faint);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+/* ---------- Article page ---------- */
+.article-header {
+  padding: 64px 0 40px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: 24px;
+}
+
+.breadcrumb a:hover { color: var(--accent); }
+
+.article-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.5vw, 44px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 780px;
+  margin-bottom: 20px;
+}
+
+.article-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+
+.article-body {
+  max-width: 720px;
+  padding: 56px 0;
+}
+
+.article-body h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  margin: 48px 0 18px;
+}
+
+.article-body h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+}
+
+.article-body p {
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+.article-body strong { color: var(--text-primary); }
+
+.article-body ul {
+  margin: 0 0 20px 20px;
+  color: var(--text-muted);
+}
+
+.article-body li { margin-bottom: 8px; }
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 32px;
+  font-size: 14px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.compare-table th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.compare-table td.num {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.compare-table tr:hover td { background: var(--bg-surface); }
+
+.faq-item {
+  border-top: 1px solid var(--border-soft);
+  padding: 20px 0;
+}
+
+.faq-item h3 { margin: 0 0 8px; }
+
+.affiliate-cta {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.affiliate-cta p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  max-width: 400px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .clarity-row { grid-template-columns: 100px 1fr 44px; gap: 12px; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Jernih Aset</a>
+    <nav class="nav-links">
+      <a href="index.html#panduan">Panduan</a>
+      <a href="index.html#kejernihan">Skor Kejernihan</a>
+      <a href="index.html#tentang">Tentang</a>
+    </nav>
+  </div>
+</header>
+
+<div class="article-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / Perbandingan</div>
+    <h1>Binance vs Coinbase vs Indodax: Mana yang Cocok untuk Pemula Indonesia?</h1>
+    <div class="article-meta">
+      <span>12 menit baca</span>
+      <span>Diperbarui 2026</span>
+      <span>Direview editor</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <article class="article-body">
+
+    <p>Kalau kamu baru mau mulai beli kripto, pertanyaan pertama yang biasanya muncul bukan "koin apa", tapi "daftar di mana". Tiga nama yang paling sering disebut untuk pengguna Indonesia adalah Binance, Coinbase, dan Indodax. Ketiganya punya karakter yang cukup berbeda, dan platform yang "terbaik" sebenarnya tergantung apa yang kamu prioritaskan: biaya rendah, kemudahan legalitas lokal, atau kelengkapan fitur.</p>
+
+    <p>Artikel ini membandingkan ketiganya dari sisi biaya, keamanan, dan kemudahan pakai — supaya kamu bisa memutuskan sendiri, bukan sekadar ikut rekomendasi orang lain.</p>
+
+    <h2>Ringkasan Perbandingan</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Aspek</th>
+          <th>Binance</th>
+          <th>Coinbase</th>
+          <th>Indodax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Biaya trading</td>
+          <td class="num">~0,1%</td>
+          <td class="num">~0,6%</td>
+          <td class="num">~0,3%</td>
+        </tr>
+        <tr>
+          <td>Legalitas di Indonesia</td>
+          <td>Terdaftar via reseller lokal</td>
+          <td>Belum ada layanan lokal resmi</td>
+          <td>Terdaftar Bappebti</td>
+        </tr>
+        <tr>
+          <td>Metode pembayaran lokal</td>
+          <td>Terbatas</td>
+          <td>Tidak tersedia</td>
+          <td>Lengkap (bank lokal, e-wallet)</td>
+        </tr>
+        <tr>
+          <td>Jumlah koin tersedia</td>
+          <td class="num">350+</td>
+          <td class="num">240+</td>
+          <td class="num">180+</td>
+        </tr>
+        <tr>
+          <td>Cocok untuk</td>
+          <td>Trader aktif</td>
+          <td>Pemula yang butuh brand familiar</td>
+          <td>Pemula yang butuh kemudahan lokal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:12px;color:var(--text-faint)">*Angka biaya adalah kisaran umum tingkat dasar dan bisa berubah sewaktu-waktu. Selalu cek halaman biaya resmi platform sebelum bertransaksi.</p>
+
+    <div class="affiliate-cta">
+      <p>Sudah cukup yakin? Daftar Binance lewat tautan referral kami — kamu dapat diskon fee trading, kami dapat komisi kecil tanpa biaya tambahan untukmu.</p>
+      <a href="#" class="btn btn-primary">Daftar Binance →</a>
+    </div>
+
+    <h2>Biaya: Siapa yang Paling Hemat?</h2>
+    <p>Untuk pengguna dengan frekuensi transaksi tinggi, selisih biaya antar platform bisa terasa signifikan dalam jangka panjang. <strong>Binance</strong> secara umum punya struktur fee paling kompetitif, apalagi kalau kamu memanfaatkan diskon dari token exchange mereka. <strong>Coinbase</strong> ada di ujung sebaliknya — fee lebih tinggi, tapi ditukar dengan reputasi dan kemudahan pakai yang sangat matang. <strong>Indodax</strong> ada di tengah, dengan keunggulan tambahan: seluruh transaksi dalam Rupiah tanpa perlu konversi mata uang asing.</p>
+
+    <h2>Keamanan dan Legalitas</h2>
+    <p>Ini bagian yang sering diremehkan pemula. <strong>Indodax</strong> beroperasi sebagai exchange yang terdaftar resmi di Bappebti, yang berarti ada kerangka regulasi lokal yang bisa jadi rujukan kalau ada sengketa. <strong>Binance</strong> dan <strong>Coinbase</strong> beroperasi secara global dengan standar keamanan kelas atas, tapi status legal untuk pengguna Indonesia perlu kamu cek berkala karena regulasinya terus berkembang.</p>
+
+    <p>Terlepas dari platform mana yang kamu pilih, langkah keamanan dasar tetap wajib: aktifkan autentikasi dua faktor (2FA), jangan pernah bagikan seed phrase ke siapapun, dan pertimbangkan pindahkan aset dalam jumlah besar ke hardware wallet.</p>
+
+    <h2>Kemudahan Pakai untuk Pemula</h2>
+    <p>Kalau kamu benar-benar baru dan belum familiar dengan istilah trading, <strong>Coinbase</strong> punya salah satu antarmuka paling ramah pemula di industri ini, lengkap dengan materi edukasi bawaan. <strong>Indodax</strong> unggul untuk pengguna Indonesia karena seluruh proses — dari deposit sampai penarikan — bisa pakai rekening bank lokal tanpa ribet. <strong>Binance</strong> punya kurva belajar sedikit lebih curam karena fiturnya sangat lengkap, tapi ini juga berarti kamu tidak perlu pindah platform saat mulai serius trading.</p>
+
+    <h2>Kesimpulan: Mana yang Harus Kamu Pilih?</h2>
+    <ul>
+      <li><strong>Pilih Indodax</strong> kalau prioritas kamu kemudahan lokal dan kepastian regulasi.</li>
+      <li><strong>Pilih Coinbase</strong> kalau kamu benar-benar baru dan mengutamakan kemudahan pakai di atas biaya.</li>
+      <li><strong>Pilih Binance</strong> kalau kamu berencana trading aktif dan ingin biaya serendah mungkin.</li>
+    </ul>
+
+    <h2>Pertanyaan yang Sering Ditanyakan</h2>
+
+    <div class="faq-item">
+      <h3>Apakah aman menyimpan kripto di exchange dalam jangka panjang?</h3>
+      <p>Untuk jumlah kecil dan kebutuhan trading aktif, cukup aman selama 2FA aktif. Untuk aset dalam jumlah besar yang tidak akan sering ditransaksikan, sebagian besar praktisi menyarankan memindahkannya ke hardware wallet.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Bisakah pakai lebih dari satu exchange sekaligus?</h3>
+      <p>Bisa, dan cukup umum dilakukan — misalnya pakai Indodax untuk deposit Rupiah, lalu pindahkan ke Binance untuk akses ke lebih banyak pilihan koin.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Apakah biaya trading bisa berubah?</h3>
+      <p>Ya, sangat mungkin berubah. Selalu cek halaman fee resmi platform sebelum transaksi dalam jumlah besar.</p>
+    </div>
+
+    <div class="callout" style="margin-top:40px">
+      <span class="callout-icon">i</span>
+      <p><strong>Ini bukan nasihat keuangan.</strong> Investasi kripto memiliki risiko tinggi, termasuk risiko kehilangan seluruh nilai investasi. Lakukan riset sendiri (DYOR) dan pertimbangkan konsultasi dengan penasihat keuangan berlisensi sebelum mengambil keputusan. Artikel ini mengandung tautan afiliasi.</p>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="logo"><span class="logo-mark"></span>Jernih Aset</a>
+      <p class="footer-note">Review dan panduan kripto independen untuk pembaca Indonesia. Dibuat oleh tim editorial kecil, dibantu riset AI, direview manusia sebelum tayang.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Tentang Kami</a>
+      <a href="#">Disclaimer</a>
+      <a href="#">Kebijakan Privasi</a>
+      <a href="#">Kontak</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
